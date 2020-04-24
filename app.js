@@ -11,6 +11,7 @@ const corsOptions = {
     origin: 'http://localhost:4200/',
     optionsSuccessStatus: 200
 }
+const moment = require('moment')
 const app = express()
 
 
@@ -34,8 +35,9 @@ mongoose.connect('mongodb://localhost:27017/ISSATSO', {
 
 //Just For Sake of testing
 app.get('/', (req, res) => {
-    res.send('Mini Project App is Running')
+    res.send('Hello Its me your app is working fine')
 })
+app.use('/api/rfid', RFIDRoutes);
 
 const db = mongoose.connection;
 

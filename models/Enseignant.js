@@ -10,7 +10,7 @@ const EnseignantSchema = new Schema({
     email: { type: String, unique: true, required: true },
     tel: { type: String, unique: true, minlength: 8, maxlength: 8, required: true },
     rfid: { type: String, unique: true, minlength: 8, maxlength: 8, required: true }
-}, { collation: 'Enseignant' });
+}, { collection: 'Enseignant' });
 
 EnseignantSchema.methods.validateEnseignant = (obj) => {
     const validSchema = Joi.object().keys({

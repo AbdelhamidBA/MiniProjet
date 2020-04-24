@@ -12,4 +12,4 @@ FiliereSchema.methods.validateFiliere = (obj) => {
     });
     return Joi.validate(obj, validSchema);
 }
-module.exports = mongoose.model('Filiere', validateFiliere);
+module.exports = mongoose.model('Filiere', FiliereSchema);

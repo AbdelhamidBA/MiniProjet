@@ -12,4 +12,4 @@ SalleSchema.methods.validateSalle = (obj) => {
     });
     return Joi.validate(obj, validSchema);
 }
-module.exports = mongoose.model('Salle', validateSalle);
+module.exports = mongoose.model('Salle', SalleSchema);
