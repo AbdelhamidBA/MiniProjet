@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser')
 const AdminRoutes = require('./routes/admin.routes')
 const EnseignantRoutes = require('./routes/enseignant.routes')
 const RFIDRoutes = require('./routes/rfid.routes')
+const ensRoute = require('./routes/enseignant.routes')
 const corsOptions = {
     origin: 'http://localhost:4200/',
     optionsSuccessStatus: 200
@@ -38,6 +39,7 @@ app.get('/', (req, res) => {
     res.send('Hello Its me your app is working fine')
 })
 app.use('/api/rfid', RFIDRoutes);
+app.use('/api/enseignant', ensRoute);
 
 const db = mongoose.connection;
 
