@@ -7,7 +7,7 @@ router.get('/stud/:studentId', AdminController.getEtudiant);
 router.post('/addstud', AdminController.AddStudent);
 router.patch('/updstud/:etudiantId', AdminController.updateStudent);
 router.delete('/deletestud/:studentId', AdminController.deleteStudent);
-router.get('/elimination/:id_filiere/:idmatiere', AdminController.Elimination);
+router.get('/elimination/:idfiliere/:idmatiere', AdminController.Elimination);
 
 
 module.exports = router;

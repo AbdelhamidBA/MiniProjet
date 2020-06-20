@@ -10,7 +10,7 @@ const SeanceSchema = new Schema({
     date: { type: String, required: true },
     heure: { type: String, required: true },
     etat: { type: String, default: 'Scheduled' }
-}, { collection: 'Seance' });
+}, { collection: 'Seance' } );
 
 SeanceSchema.methods.validateSeance = (obj) => {
     const validSchema = Joi.object().keys({
