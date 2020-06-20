@@ -76,11 +76,12 @@ exports.deleteStudent= async(req,res) => {
 
 
 exports.Elimination= async(req,res) => {
+ try{
   let ListeElimination=[];
   let Matiere= await getMatiere(req.params.idmatiere);
   console.log("matiere",Matiere);
   let Minseance = Matiere.nbSeanceMin;
-  try{
+  
     let liste= await getEtudiant(req.params.id_filiere)  
             for(let i=0;i<liste.length;i++){
                   let countpres=await countPresence(liste[i]._id,req.params.idmatiere);
@@ -90,6 +91,7 @@ exports.Elimination= async(req,res) => {
                         }   
 
                         console.log("elimination"+ListeElimination)
+                        return ListeElimination;
   }catch(err){
     res.json({message:err})
 
@@ -144,6 +146,8 @@ async function getSeanceofmatiere(idmat) {
 async function getEtudiant(id_fil) {
   try {
       let etd = await Etudiant.find({ id_filiere: id_fil })
+      
+      console.log('etudiant filiere'+etd);
       return etd
   } catch (err) {
       console.log('Etudiant:' + err)
