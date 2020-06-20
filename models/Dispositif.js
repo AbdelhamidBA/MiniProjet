@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const DispositifSchema = new Schema({
     id_salle: { type: Schema.Types.ObjectId, ref: 'Salle', required: true }
-}, { collection: 'Dispositif' });
+}, { collection: 'Dispositif', autoCreate: true });
 
 DispositifSchema.methods.validateDispositif = (obj) => {
     const validSchema = Joi.object().keys({

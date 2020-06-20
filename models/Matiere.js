@@ -9,7 +9,7 @@ const MatiereSchema = new Schema({
     type: { type: String, required: true },
     nbSeanceTotal: { type: Float, required: true },
     nbSeanceMin: { type: Number, required: true }
-}, { collection: 'Matiere' });
+}, { collection: 'Matiere', autoCreate: true });
 
 MatiereSchema.methods.validateMatiere = (obj) => {
     const validSchema = Joi.object().keys({

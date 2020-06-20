@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const FiliereSchema = new Schema({
     libelle: { type: String, unique: true, required: true }
-}, { collection: 'Filiere' });
+}, { collection: 'Filiere', autoCreate: true });
 
 FiliereSchema.methods.validateFiliere = (obj) => {
     const validSchema = Joi.object().keys({
