@@ -82,9 +82,9 @@ exports.Elimination= async(req,res) => {
   console.log("matiere",Matiere);
  
   let Minseance = Matiere.nbSeanceMin;
-  
-    let liste= await getEtudiant(req.params.idfiliere)  
-    console.log("liste"+lise);
+  console.log('----');
+    let liste= await getEtudiant(req.params.idfiliere) ;
+    console.log("liste"+liste);
             for(let i=0;i<liste.length;i++){
                   let countpres=await countPresence(liste[i]._id,req.params.idmatiere);
                          if (countpres < Minseance )
@@ -125,10 +125,10 @@ async function getFiliere(idFiliere) {
 async function countPresence(idetud,idmat) {
   try {
       let count= await Presence.count({
-     id_etd: idetud,
-      id_seance: { "$in": await getSeanceofmatiere(idmat) }
-      });
      
+      id_seance: { "$in": await getSeanceofmatiere(idmat) },
+      id_etd: idetud });
+      
       console.log('count'+count) ;
       return count;
   }catch(err){
@@ -138,9 +138,14 @@ async function countPresence(idetud,idmat) {
 
 async function getSeanceofmatiere(idmat) {
   try {
+      let arrayID = [];
       let seance = await Seance.find({ id_matiere: idmat })
-      console.log('seance'+ seance._id);
-      return seance._id
+      console.log('seance'+ seance);
+      for(let s of seance){
+        arrayID.push(s._id);
+      }
+      console.log("ArrayID:"+ arrayID);
+      return arrayID;
 
   } catch (err) {
       console.log('Seance:' + err)
@@ -149,9 +154,8 @@ async function getSeanceofmatiere(idmat) {
 
 async function getEtudiant(id_fil) {
   try {
-      let etd = await Etudiant.find({ id_filiere: "5eed4fde2851537454453acb"})
-      
-      console.log('etudiant filiere'+etd);
+   
+      let etd = await Etudiant.find({ id_filiere:id_fil})
       return etd
   } catch (err) {
       console.log('Etudiant:' + err)
