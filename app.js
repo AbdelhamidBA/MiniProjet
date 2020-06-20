@@ -7,13 +7,14 @@ const cookieParser = require('cookie-parser')
 const AdminRoutes = require('./routes/admin.routes')
 const EnseignantRoutes = require('./routes/enseignant.routes')
 const RFIDRoutes = require('./routes/rfid.routes')
-const ensRoute = require('./routes/enseignant.routes')
+const AuthenticationRoute = require('./routes/auth.routes');
 const corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200
 }
 const moment = require('moment')
 const app = express()
+
 
 
 app.use('/public', express.static('public'))
@@ -40,9 +41,27 @@ app.get('/', (req, res) => {
 })
 
 //routes
-app.use('/api/admin',AdminRoutes);
+app.use('/api/admin', AdminRoutes);
 app.use('/api/rfid', RFIDRoutes);
-app.use('/api/enseignant', ensRoute);
+app.use('/api', AuthenticationRoute);
+
+
+function verifToken(req, res, next) {
+    if (!req.headers.authorization) {
+        return res.status(401).send('Unauthorized Request');
+    }
+    let token = req.headers.authorization.split(' ')[1];
+    if (token === null) {
+        return res.status(401).send('Unauthorized Request');
+    } else {
+        let payload = jwt.verify(token, 'ISSATSecurityCode');
+        if (!payload) {
+            return res.status(401).send('Unauthorized Request');
+        }
+        req.userId = payload.subject;
+        next();
+    }
+}
 
 const db = mongoose.connection;
 

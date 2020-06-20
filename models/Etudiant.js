@@ -11,7 +11,7 @@ const EtudiantSchema = new Schema({
     tel: { type: String, unique: true, required: true },
     id_filiere: { type: Schema.Types.ObjectId, ref: 'Filiere', required: true },
     rfid: { type: String, unique: true, required: true }
-}, { collection: 'Etudiant' });
+}, { collection: 'Etudiant', autoCreate: true });
 
 EtudiantSchema.methods.validateEtudiant = (obj) => {
     let validSchema = Joi.object().keys({

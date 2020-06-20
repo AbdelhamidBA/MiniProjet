@@ -7,7 +7,7 @@ const PresenceSchema = new Schema({
     id_etd: { type: Schema.Types.ObjectId, ref: 'Etudiant', required: true },
     //date: { type: String, required: true },
     etat: { type: String, required: true, minlength: 1, maxlength: 1 }
-}, { collection: 'Presence' });
+}, { collection: 'Presence', autoCreate: true });
 
 PresenceSchema.methods.validatePresence = (obj) => {
     const validSchema = Joi.object().keys({

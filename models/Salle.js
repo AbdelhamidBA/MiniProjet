@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const SalleSchema = new Schema({
     libelle: { type: String, unique: true, required: true }
-}, { collection: 'Salle' });
+}, { collection: 'Salle', autoCreate: true });
 
 SalleSchema.methods.validateSalle = (obj) => {
     const validSchema = Joi.object().keys({

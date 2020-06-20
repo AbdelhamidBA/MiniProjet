@@ -5,12 +5,12 @@ const Schema = mongoose.Schema;
 const SeanceSchema = new Schema({
     id_ens: { type: Schema.Types.ObjectId, ref: 'Enseignant', required: true },
     id_salle: { type: Schema.Types.ObjectId, ref: 'Salle', required: true },
-    id_matiere:  { type: Schema.Types.ObjectId, ref: 'Matiere', required: true },
-    id_filiere:{ type: Schema.Types.ObjectId, ref: 'Filere', required: true },
+    id_matiere: { type: Schema.Types.ObjectId, ref: 'Matiere', required: true },
+    id_filiere: { type: Schema.Types.ObjectId, ref: 'Filere', required: true },
     date: { type: String, required: true },
     heure: { type: String, required: true },
     etat: { type: String, default: 'Scheduled' }
-}, { collection: 'Seance' } );
+}, { collection: 'Seance', autoCreate: true });
 
 SeanceSchema.methods.validateSeance = (obj) => {
     const validSchema = Joi.object().keys({
