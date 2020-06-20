@@ -9,7 +9,7 @@ const EnseignantRoutes = require('./routes/enseignant.routes')
 const RFIDRoutes = require('./routes/rfid.routes')
 const ensRoute = require('./routes/enseignant.routes')
 const corsOptions = {
-    origin: 'http://localhost:4200/',
+    origin: '*',
     optionsSuccessStatus: 200
 }
 const moment = require('moment')
@@ -38,6 +38,9 @@ mongoose.connect('mongodb://localhost:27017/ISSATSO', {
 app.get('/', (req, res) => {
     res.send('Hello Its me your app is working fine')
 })
+
+//routes
+app.use('/api/admin',AdminRoutes);
 app.use('/api/rfid', RFIDRoutes);
 app.use('/api/enseignant', ensRoute);
 

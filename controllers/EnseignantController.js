@@ -60,24 +60,6 @@ exports.ListSeance = async(req, res) => {
 }
 
 
-exports.InsertMatiere = async(req, res) => {
-    try {
-
-        let ens = new Presence({
-            id_seance: '5eceee1fb673f840f804e4c3',
-            id_etd: '5ecee91e643f9e2e4c98befc',
-            //date: { type: String, required: true },
-            etat: 'P',
-        })
-
-
-        let newMat = await ens.save()
-        console.log('Sucessfully Added :' + newMat)
-    } catch (err) {
-        console.log('Inserting Error : ' + err)
-    }
-}
-
 async function ListEtudiant(idFiliere) {
     try {
 
@@ -115,6 +97,7 @@ exports.ListPresence = async(req, res) => {
                     id: etd._id,
                     nom: etd.nom,
                     prenom: etd.prenom,
+                    cin: etd.cin,
                     etat: "P"
                 });
             } else {
@@ -122,6 +105,7 @@ exports.ListPresence = async(req, res) => {
                     id: etd._id,
                     nom: etd.nom,
                     prenom: etd.prenom,
+                    cin: etd.cin,
                     etat: "A"
                 });
             }
@@ -164,6 +148,37 @@ exports.getMatiere = async(req, res) => {
         });
     }
 }
+
+//Get Salle
+
+exports.getSalle = async(req, res) => {
+    try {
+        //let idEnseignant = req.body.idens;
+        let salle = await Salle.find();
+        if (Object.keys(salle).length != 0) {
+            res.json({
+                salle: salle,
+                error: false
+            });
+        } else {
+            res.json({
+                salle: null,
+                error: false
+            });
+        }
+    } catch (err) {
+        console.log(err)
+        res.json({
+            salle: null,
+            error: true
+
+        });
+    }
+}
+
+
+//
+
 
 exports.getFiliere = async(req, res) => {
     try {
@@ -218,7 +233,8 @@ exports.statistic = async(req, res) => {
 exports.UpdateEtudiant = async(req, res) => {
 
     let idseance = req.body.id_seance;
-    let idetd = req.body.id_etd;
+    console.log("ID LOULOU" + idseance)
+    let idetd = req.params.id_etd;
 
     try {
         let presenceLine = await Presence.findOne({ id_seance: idseance, id_etd: idetd });

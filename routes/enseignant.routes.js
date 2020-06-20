@@ -6,8 +6,8 @@ router.get('/:idens/seance', enseignant.ListSeance);
 router.get('/:idseance/presence', enseignant.ListPresence);
 router.get('/matiere', enseignant.getMatiere);
 router.get('/filiere', enseignant.getFiliere);
-router.post('/upd', enseignant.UpdateEtudiant);
-router.post('/add', enseignant.InsertMatiere);
+router.get('/salle', enseignant.getSalle);
+router.post('/:id_etd/upd', enseignant.UpdateEtudiant);
 router.get('/statis', enseignant.statistic);
 
 module.exports = router;
