@@ -34,6 +34,9 @@ exports.AddStudent= async(req,res) => {
 }
 
 
+
+
+
 exports.updateStudent= async(req,res) =>{
   try{
     const updatedStudent = await Etudiant.updateOne({_id: req.params.etudiantId},
