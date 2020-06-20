@@ -79,9 +79,13 @@ exports.ListPresence = async(req, res) => {
     let stdFound = false;
     try {
         let IdSeance = req.params.idseance;
+        console.log("IdSeance:" + IdSeance);
         let seance = await getSeanceByID(IdSeance);
+        console.log("------------------");
+        console.log("Seance:" + seance);
         let presence = await Presence.find({ id_seance: IdSeance });
-
+        console.log("------------------");
+        console.log("presence:" + presence);
         let listetudiant = await ListEtudiant(seance.id_filiere);
 
         listetudiant.forEach(etd => {
@@ -112,6 +116,7 @@ exports.ListPresence = async(req, res) => {
 
             stdFound = false;
         });
+        console.log("I Got Here");
 
         res.json({
             ListPres: JSON.parse(JSON.stringify(presencetd))
