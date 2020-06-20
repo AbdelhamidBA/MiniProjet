@@ -80,9 +80,11 @@ exports.Elimination= async(req,res) => {
   let ListeElimination=[];
   let Matiere= await getMatiere(req.params.idmatiere);
   console.log("matiere",Matiere);
+ 
   let Minseance = Matiere.nbSeanceMin;
   
-    let liste= await getEtudiant(req.params.id_filiere)  
+    let liste= await getEtudiant(req.params.idfiliere)  
+    console.log("liste"+lise);
             for(let i=0;i<liste.length;i++){
                   let countpres=await countPresence(liste[i]._id,req.params.idmatiere);
                          if (countpres < Minseance )
@@ -90,8 +92,8 @@ exports.Elimination= async(req,res) => {
                         
                         }   
 
-                        console.log("elimination"+ListeElimination)
-                        return ListeElimination;
+                        console.log("elimination" +ListeElimination)
+                        res.json(ListeElimination);
   }catch(err){
     res.json({message:err})
 
@@ -136,8 +138,10 @@ async function countPresence(idetud,idmat) {
 
 async function getSeanceofmatiere(idmat) {
   try {
-      let seance = await Seance.findOne({ id_matiere: idmat })
+      let seance = await Seance.find({ id_matiere: idmat })
+      console.log('seance'+ seance._id);
       return seance._id
+
   } catch (err) {
       console.log('Seance:' + err)
   }
@@ -145,7 +149,7 @@ async function getSeanceofmatiere(idmat) {
 
 async function getEtudiant(id_fil) {
   try {
-      let etd = await Etudiant.find({ id_filiere: id_fil })
+      let etd = await Etudiant.find({ id_filiere: "5eed4fde2851537454453acb"})
       
       console.log('etudiant filiere'+etd);
       return etd
