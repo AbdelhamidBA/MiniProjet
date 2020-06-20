@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const AdminController= require('../controllers/AdminController');
+const AdminController = require('../controllers/AdminController');
 
 router.get('/liststud', AdminController.listeEtudiant);
 router.get('/stud/:studentId', AdminController.getEtudiant);
@@ -11,4 +11,3 @@ router.get('/elimination/:idfiliere/:idmatiere', AdminController.Elimination);
 
 
 module.exports = router;
-
